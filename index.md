@@ -17,7 +17,7 @@ assets      :
     - "http://fonts.googleapis.com/css?family=Vollkorn"
     - "http://fonts.googleapis.com/css?family=Droid%20Sans%20Mono"
 github:
-  website: "https://github.com/kferris10/Ch7-Comparing-Regression-act"
+  website: "https://github.com/kferris10/Ch7-Comparing-Regression-Models"
 ---
 
 
