@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Comparing Multiple Regression Models</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="favicon.ico">
+  <link  rel="stylesheet" 
+    href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+  <link rel="stylesheet" href="libraries/frameworks/bootstrap3/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="libraries/frameworks/bootstrap3/css/main.css">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/github.css" />
+  <script src="libraries/frameworks/bootstrap3/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/frameworks/bootstrap3/js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+    <link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/moving_sidebar.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+<link rel=stylesheet href="http://fonts.googleapis.com/css?family=Vollkorn"></link>
+<link rel=stylesheet href="http://fonts.googleapis.com/css?family=Droid%20Sans%20Mono"></link>
+
+  <script src="libraries/frameworks/bootstrap3/js/jquery.js"></script>
+  
+</head>
+<body data-spy = "scroll" data-target = ".page-sidebar">
+   <!--[if lt IE 7]>
+     <p class="chromeframe">You are using an outdated browser. 
+       <a href="http://browsehappy.com/">Upgrade your browser today</a> or 
+       <a href="http://www.google.com/chromeframe/?redirect=true"> 
+         install Google Chrome Frame
+       </a> to better experience this site.
+    </p>
+   <![endif]-->
+
+  <div class="container-fluid">
+  
+  <a href=https://github.com/kferris10/Ch7-Comparing-Regression-act><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+
+  <div class = "row">
+
+    <div class="jumbotron">
+      <div class="container-fluid">
+        <h1>Comparing Multiple Regression Models</h1>
+        <h3>Ch 7 Multiple Linear Regression</h3>
+        <h3>Stat 217</h3>
+        <h3> 2015-04-19 </h3>
+      </div>
+    </div>
+        
+    <div class = "row">
+    
+<!--
+SIDEBAR-NAV
+-->
+        <div class = "col-md-3 pull-right hidden-sm hidden-xs hidden-print page-sidebar affix-top">
+					  <nav class = "sidebar-nav">
+						  <ul class = "nav affix-top" data-spy="affix" data-offset-top="20" data-offset-bottom="20" role = "navigation">
+                
+                <li><a href = "#slide-1"> Introduction</a></li>
+
+                <li><a href = "#slide-2"> Data</a></li>
+
+                <li><a href = "#slide-3"> Take Home Question 1</a></li>
+
+                <li><a href = "#slide-4"> Hypotheses comparing models 1 and 2</a></li>
+
+                <li><a href = "#slide-5"> Assumptions Comparing Models 1 and 2</a></li>
+
+                <li><a href = "#slide-6"> Test Statistic, Distribution, and P-value</a></li>
+
+                <li><a href = "#slide-7"> Decision and Conclusion comparing model 1 &amp; 2</a></li>
+
+                <li><a href = "#slide-8"> Take Home Question 2</a></li>
+
+                <li><a href = "#slide-9"> Hypotheses comparing models 3 vs 4</a></li>
+
+                <li><a href = "#slide-10"> Assumptions comparing models 3 vs 4</a></li>
+
+                <li><a href = "#slide-11"> Test Statistic, Distribution, and P-value</a></li>
+
+                <li><a href = "#slide-12"> Decision and Conclusion comparing model 3 &amp; 4</a></li>
+
+                <li><a href = "#slide-13"> Take Home Question 3</a></li>
+
+                <li><a href = "#slide-14"> Comparing models using Adjusted \(R^2\)</a></li>
+
+                <li><a href = "#slide-15"> Take Home Question 4</a></li>
+
+                <li><a href = "#slide-16"> Take Home Question 5</a></li>
+
+                <li><a href = "#slide-17"> Take Home Question 6</a></li>
+						  </ul>
+					  </nav>
+        </div>  <!-- end sidebar -->
+
+<!--
+PAGE CONTENT
+-->
+        <div class = "col-md-9 col-sm-12 push-left">
+          <div class="section" id="slide-1">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Introduction</h2>
+    <hr>
+    </div>
+  <p>This activity will explore how to compare multiple regression models to find the &quot;best&quot; one.  The data set we will be using contains information on 1000 student&#39;s GPA in their first year of college.  Universities would like to try to predict student&#39;s GPA so they can determine who might need additional help on admission.  We will try to predict student&#39;s FYGPA (First Year GPA) using High School GPA (HSGPA) and SATSum (Sum of Math and Verbal SAT scores).</p>
+
+<p>We will consider four potential models to predict GPA:</p>
+
+<ol>
+<li>\(FYGPA_i = \beta_0 + \epsilon_i\)  (This model does not use either explanatory variable to predict FYGPA)</li>
+<li>\(FYGPA_i = \beta_0 + \beta_1 \times HSGPA_i + \epsilon_i\) (This model only uses HSGPA)</li>
+<li>\(FYGPA_i = \beta_0 + \beta_1 \times SATSum_i + \epsilon_i\) (This model only uses SATSum)</li>
+<li>\(FYGPA_i = \beta_0 + \beta_1 \times HSGPA_i + \beta_2 \times SATSum_i + \epsilon_i\) (This model uses both HSGPA and SATSum)</li>
+</ol>
+
+<p>The goal is to obtain the best model, then interpret the coefficients in that model so that school administrators know how to assess these variables when deciding on admissions.</p>
+
+  </div>
+</div>
+<div class="section" id="slide-2">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Data</h2>
+    <hr>
+    </div>
+  <p>The data are located in the <code>openintro</code> package.  We will only be working with the \(4^{th}, 5^{th}, \, \text{and} 6^{th}\) columns so I&#39;m going to extract those.  </p>
+
+<pre><code class="r">require(openintro)
+data(satGPA)
+sat_sub &lt;- satGPA[, c(4,5,6)]
+head(sat_sub)
+</code></pre>
+
+<pre><code>#&gt;   SATSum HSGPA FYGPA
+#&gt; 1    127  3.40  3.18
+#&gt; 2    122  4.00  3.33
+#&gt; 3    116  3.75  3.25
+#&gt; 4     95  3.75  2.42
+#&gt; 5    107  4.00  2.63
+#&gt; 6    111  4.00  2.91
+</code></pre>
+
+<p>If you are curious about any of these variables, take a look at the help page for the data by typing <code>?satGPA</code> in R.</p>
+
+  </div>
+</div>
+<div class="section" id="slide-3">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Take Home Question 1</h2>
+    <hr>
+    </div>
+  <p>1) Use the scatterplot matrix below to describe the relationship between each variable and the response.  Also, comment on whether multicollinearity appears to be a problem.</p>
+
+<pre><code class="r">pairs(~SATSum + HSGPA + FYGPA, data = sat_sub)
+</code></pre>
+
+<p><img src="assets/fig/scatterplot-matrix-1.png" title="plot of chunk scatterplot-matrix" alt="plot of chunk scatterplot-matrix" style="display: block; margin: auto;" /></p>
+
+  </div>
+</div>
+<div class="section" id="slide-4">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Hypotheses comparing models 1 and 2</h2>
+    <hr>
+    </div>
+  
+<div class="quiz quiz-single well ">
+  <p>We will start by seeing if \(HSGPA\) is related to \(FYGPA\).  To do this, we will use Model 2 from the introduction.  What are the appropriate hypotheses?</p>
+
+<ol>
+<li>\(H_0: \beta_0 = 0; H_A: \beta_0 \neq 0\)</li>
+<li><em>\(H_0: \beta_1 = 0; H_A: \beta_1 \neq 0\)</em></li>
+<li>\(H_0: \beta_2 = 0; H_A: \beta_2 \neq 0\)</li>
+<li>\(H_0: \epsilon_i = 0; H_A: \epsilon_i \neq 0\)</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Which coefficient are we testing?</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>\(\beta_1\) is the coefficient which specifies the relationship between HSGPA and FYGPA.  If it is zero, then there is no linear relationship between the two.</p>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-5">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Assumptions Comparing Models 1 and 2</h2>
+    <hr>
+    </div>
+  
+<div class="quiz quiz-multiple well" data-individual>
+  <p>Based on the diagnostic plots, which assumptions will we assume are met?</p>
+
+<pre><code class="r">m2 &lt;- lm(FYGPA ~ HSGPA, data = sat_sub)  ## fitting the model
+par(mfrow = c(2,2))                      ## requesting 2 rows and columns
+plot(m2)                                 ## plotting diagnostics
+par(mfrow = c(1,1))                      ## requesting 1 row and column
+</code></pre>
+
+<p><img src="assets/fig/diag_m2-1.png" title="plot of chunk diag_m2" alt="plot of chunk diag_m2" style="display: block; margin: auto;" /></p>
+
+<ol>
+<li><em>Quantitative Variables</em></li>
+<li><em>Independence</em></li>
+<li><em>Constant Variance</em></li>
+<li>Expected Counts greater than </li>
+<li><em>Linearity</em></li>
+<li><em>Normality</em></li>
+<li><em>No Influential Points</em></li>
+<li>Multicollinearity</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>This is a Simple Linear Regression model.  Make sure that you are only looking at the assumptions necessary for Simple Linear Regression.</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>Expected counts and multicollinearity are not assumptions required for SLR.  The other assumptions all appear to be valid.</p>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-6">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Test Statistic, Distribution, and P-value</h2>
+    <hr>
+    </div>
+  
+<div class="quiz-text quiz-multitext well">
+  <pre><code class="r">summary(m2)                              ## summarizing the fitted model
+</code></pre>
+
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = FYGPA ~ HSGPA, data = sat_sub)
+#&gt; 
+#&gt; Residuals:
+#&gt;     Min      1Q  Median      3Q     Max 
+#&gt; -2.3054 -0.3742  0.0394  0.4191  1.7524 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)
+#&gt; (Intercept)   0.0913     0.1179    0.77     0.44
+#&gt; HSGPA         0.7431     0.0363   20.45   &lt;2e-16
+#&gt; 
+#&gt; Residual standard error: 0.622 on 998 degrees of freedom
+#&gt; Multiple R-squared:  0.295,  Adjusted R-squared:  0.295 
+#&gt; F-statistic:  418 on 1 and 998 DF,  p-value: &lt;2e-16
+</code></pre>
+
+<ol>
+<li>What is the appropriate test statistic?</li>
+<li>It is assumed to follow a \(t\) distribution with how many degrees of freedom? (Recall that \(n = 1000\))</li>
+<li>What is the p-value (if it is less that 0.001, enter 0)</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>These can all be found in the summary output by looking in the appropriate places.</p>
+
+</div>
+<div class="quiz-explanation">
+  <ol>
+<li><span class = "answer">20.45</span>
+The test statistic is the <code>t value</code></li>
+<li><span class = "answer">998</span>
+There are \(n = 1000\) students and we are estimating two coefficients so the degrees of freedom = \(1000 - 2 = 998\).</li>
+<li><span class = "answer">0</span>
+The actual p-value is less than \(2 * 10^{-16}\)</li>
+</ol>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-7">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Decision and Conclusion comparing model 1 &amp; 2</h2>
+    <hr>
+    </div>
+  
+<p>What is your decision?  Write a conclusion in the context of the problem.</p>
+
+
+<textarea rows="" style="width:95%" class='submitCompare'
+  placeholder='Type your answer (at least 140 characters)'>
+</textarea>
+<a class='btn btn-success submitCompare'>
+  Submit and Compare
+</a>
+<a class='btn btn-danger clearSubmitCompare'>Clear</a>
+
+<div class='explanation' style='display: none;'>
+  <p>Reject the null.  There is strong evidence that there is a linear relationship between high school GPA and first year GPA in college in the population of students.</p>
+
+</div>
+  </div>
+</div>
+<div class="section" id="slide-8">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Take Home Question 2</h2>
+    <hr>
+    </div>
+  <p>Next, we want to test for an effect of SATSum.  We can perform a similar process as before by comparing a model with only SATSum as an explanatory variable to a model with no explanatory variables.  </p>
+
+<p>2) Use the diagnostic plots and summary output below to perform the six steps of a hypothesis test comparing models 1 and 3.</p>
+
+<p>Diagnostic plots</p>
+
+<pre><code class="r">m3 &lt;- lm(FYGPA ~ SATSum, data = sat_sub)
+par(mfrow = c(2,2))
+plot(m3)
+par(mfrow = c(1,1))
+</code></pre>
+
+<p><img src="assets/fig/diag_m3-1.png" title="plot of chunk diag_m3" alt="plot of chunk diag_m3" style="display: block; margin: auto;" /></p>
+
+<p>Model Summary</p>
+
+<pre><code class="r">summary(m3)
+</code></pre>
+
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = FYGPA ~ SATSum, data = sat_sub)
+#&gt; 
+#&gt; Residuals:
+#&gt;     Min      1Q  Median      3Q     Max 
+#&gt; -2.1976 -0.4495  0.0315  0.4557  1.6115 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)
+#&gt; (Intercept)  0.00193    0.15199    0.01     0.99
+#&gt; SATSum       0.02387    0.00146   16.38   &lt;2e-16
+#&gt; 
+#&gt; Residual standard error: 0.658 on 998 degrees of freedom
+#&gt; Multiple R-squared:  0.212,  Adjusted R-squared:  0.211 
+#&gt; F-statistic:  268 on 1 and 998 DF,  p-value: &lt;2e-16
+</code></pre>
+
+  </div>
+</div>
+<div class="section" id="slide-9">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Hypotheses comparing models 3 vs 4</h2>
+    <hr>
+    </div>
+  
+<div class="quiz quiz-single well ">
+  <p>We have decided that both FYGPA and SATSum are important predictors <strong>on their own</strong>.  Now we will test to see if they are important together.  </p>
+
+<p>First we will test to see if HSGPA is important after accounting for SATSum.  Which model should we perform the hypothesis test on?  What is the appropriate null hypothesis?</p>
+
+<ol>
+<li>Model 2; \(H_0: \beta_1 = 0\)</li>
+<li>Model 3; \(H_0: \beta_1 = 0\)</li>
+<li><em>Model 4; \(H_0: \beta_1 = 0\)</em></li>
+<li>Model 4; \(H_0: \beta_2 = 0\)</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Which model estimates the effect of HSGPA controlling for SATSum?</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>Model 4 estimates the effect of both HSGPA and SATSum after controlling for the other.</p>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-10">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Assumptions comparing models 3 vs 4</h2>
+    <hr>
+    </div>
+  
+<div class="quiz quiz-multiple well" data-individual>
+  <p>Based on the diagnostic plots, which assumptions will we assume are met?</p>
+
+<pre><code class="r">m4 &lt;- lm(FYGPA ~ HSGPA + SATSum, data = sat_sub)  
+par(mfrow = c(2,2))                  
+plot(m4)                             
+par(mfrow = c(1,1))                 
+</code></pre>
+
+<p><img src="assets/fig/diag_m4-1.png" title="plot of chunk diag_m4" alt="plot of chunk diag_m4" style="display: block; margin: auto;" /></p>
+
+<p>Here are the Variance Inflation Factors</p>
+
+<pre><code class="r">require(car)
+vif(m4)
+</code></pre>
+
+<pre><code>#&gt;  HSGPA SATSum 
+#&gt;   1.23   1.23
+</code></pre>
+
+<ol>
+<li><em>Quantitative Variables</em></li>
+<li><em>Independence</em></li>
+<li><em>Constant Variance</em></li>
+<li>Expected Counts greater than </li>
+<li><em>Linearity</em></li>
+<li><em>Normality</em></li>
+<li><em>No Influential Points</em></li>
+<li><em>Multicollinearity</em></li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>This is a Multiple Linear Regression model.  Make sure that you are only looking at the assumptions necessary for MLR.</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>Expected counts still is not necessary.  The VIFs are small so multicollinearity is met.</p>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-11">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Test Statistic, Distribution, and P-value</h2>
+    <hr>
+    </div>
+  
+<div class="quiz-text quiz-multitext well">
+  <pre><code class="r">summary(m4)                       
+</code></pre>
+
+<pre><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = FYGPA ~ HSGPA + SATSum, data = sat_sub)
+#&gt; 
+#&gt; Residuals:
+#&gt;     Min      1Q  Median      3Q     Max 
+#&gt; -2.1189 -0.3413  0.0243  0.4095  1.6237 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)
+#&gt; (Intercept) -0.87343    0.14903   -5.86  6.3e-09
+#&gt; HSGPA        0.57949    0.03846   15.07  &lt; 2e-16
+#&gt; SATSum       0.01440    0.00146    9.88  &lt; 2e-16
+#&gt; 
+#&gt; Residual standard error: 0.594 on 997 degrees of freedom
+#&gt; Multiple R-squared:  0.358,  Adjusted R-squared:  0.357 
+#&gt; F-statistic:  278 on 2 and 997 DF,  p-value: &lt;2e-16
+</code></pre>
+
+<ol>
+<li>What is the appropriate test statistic?</li>
+<li>It is assumed to follow a \(t\) distribution with how many degrees of freedom? (Recall that \(n = 1000\))</li>
+<li>What is the p-value (if it is less that 0.001, enter 0)</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>These can all be found in the summary output by looking in the appropriate places.</p>
+
+</div>
+<div class="quiz-explanation">
+  <ol>
+<li><span class = "answer">15.07</span>
+The test statistic is the <code>t value</code></li>
+<li><span class = "answer">997</span>
+There are \(n = 1000\) students and we are estimating three coefficients so the degrees of freedom = \(1000 - 3 = 997\).</li>
+<li><span class = "answer">0</span>
+The actual p-value is less than \(2 * 10^{-16}\)</li>
+</ol>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-12">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Decision and Conclusion comparing model 3 &amp; 4</h2>
+    <hr>
+    </div>
+  
+<p>What is your decision?  Write a conclusion in the context of the problem.</p>
+
+
+<textarea rows="" style="width:95%" class='submitCompare'
+  placeholder='Type your answer (at least 140 characters)'>
+</textarea>
+<a class='btn btn-success submitCompare'>
+  Submit and Compare
+</a>
+<a class='btn btn-danger clearSubmitCompare'>Clear</a>
+
+<div class='explanation' style='display: none;'>
+  <p>Reject the null.  There is strong evidence that there is a linear relationship between high school GPA and first year GPA in college in the population of students after accounting for the student&#39;s total SAT score.</p>
+
+</div>
+  </div>
+</div>
+<div class="section" id="slide-13">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Take Home Question 3</h2>
+    <hr>
+    </div>
+  <p>We have decided that HSGPA is important after accounting for SAT score.  Now, we will test to see if SAT score is important after accounting for HSGPA.</p>
+
+<p>3) Use the diagnostic plots and summary output above to perform the six steps of a hypothesis test for an effect of SATSum after accounting for HSGPA.</p>
+
+  </div>
+</div>
+<div class="section" id="slide-14">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Comparing models using Adjusted \(R^2\)</h2>
+    <hr>
+    </div>
+  
+<div class="quiz quiz-single well ">
+  <p>Instead of performing hypothesis tests using Adjusted \(R^2\).  Here are the adjusted \(R^2\) for the four models.</p>
+
+<div class = "table table-hover table-bordered">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Explanatory Variables </th>
+   <th style="text-align:right;"> Adjusted $R^2$ </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> none </td>
+   <td style="text-align:right;"> 0.000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> HSGPA </td>
+   <td style="text-align:right;"> 0.295 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SATSum </td>
+   <td style="text-align:right;"> 0.211 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> HSGPA, SATSum </td>
+   <td style="text-align:right;"> 0.357 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<p>Using Adjusted \(R^2\), which model is preferred?</p>
+
+<ol>
+<li>Model 1</li>
+<li>Model 2</li>
+<li>Model 3</li>
+<li><em>Model 4</em></li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Recall that larger Adjusted \(R^2\) suggest a better fit</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>Model 4 has the largest Adjusted \(R^2\)</p>
+
+</div>
+</div>
+  </div>
+</div>
+<div class="section" id="slide-15">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Take Home Question 4</h2>
+    <hr>
+    </div>
+  <p>Using both hypothesis tests and adjusted \(R^2\), we decided that both explanatory variables are important.  So model 4 is preferable.</p>
+
+<p>4) Provide 95% confidence intervals for both coefficients.  Use \(t^*\)</p>
+
+  </div>
+</div>
+<div class="section" id="slide-16">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Take Home Question 5</h2>
+    <hr>
+    </div>
+  <p>We found that both variables have a statistically significant relationship with a college student&#39;s First Year GPA.  However, the \(R^2\) for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.</p>
+
+<p>5) </p>
+
+  </div>
+</div>
+<div class="section" id="slide-17">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h2>Take Home Question 6</h2>
+    <hr>
+    </div>
+  <p>6) Write a scope of inference for these data.</p>
+
+  </div>
+</div>
+        </div>  <!-- end content -->
+      
+      </div> <!-- end container -->
+    </div>  <!-- end content row -->
+
+   
+    <!-- Footer -->
+    <footer id="top" role="footer">
+      <div class="container-fluid">
+        <span class="text-muted">Built by <a href="http://slidify.org/">Slidify</a>.  Styled using <a href="http://getbootstrap.com/">Bootstrap</a>.  Hosted on <a href="https://github.com/">GitHub</a>.</span>
+      </div>
+    </footer>
+
+  </div>    <!-- end main row -->
+</body>
+  <script src="libraries/frameworks/bootstrap3/js/bootstrap.min.js"></script>
+  <script src="libraries/frameworks/bootstrap3/js/plugins.js"></script>
+  <script src="libraries/frameworks/bootstrap3/js/main.js"></script>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

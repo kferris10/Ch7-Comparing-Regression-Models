@@ -1,0 +1,324 @@
+---
+title       : Comparing Multiple Regression Models
+subtitle    : Ch 7 Multiple Linear Regression
+author      : Stat 217
+today       : " `r Sys.Date()` "
+framework   : bootstrap3
+highlighter : highlight.js 
+hitheme     : github      
+widgets     : [mathjax, quiz, bootstrap]
+layout      : deck3
+mode        : selfcontained 
+knit        : slidify::knit2slides
+assets      : 
+  css       : 
+    - "assets/css/custom.css"
+    - "assets/css/moving_sidebar.css"
+    - "http://fonts.googleapis.com/css?family=Vollkorn"
+    - "http://fonts.googleapis.com/css?family=Droid%20Sans%20Mono"
+github:
+  website: "https://github.com/kferris10/Ch7-Comparing-Regression-act"
+---
+
+```{r setup, message = F, warning = F, error = F, echo = F, tidy = F, cache = F}
+library(knitr)
+opts_chunk$set(message = F, 
+               warning = F, 
+               echo = TRUE, 
+               error = F, 
+               tidy = F, 
+               cache = F, 
+               fig.width = 8, 
+               fig.height = 8, 
+               fig.align = "center", 
+               fig.show = "hold", 
+               comment = "#>")
+options(show.signif.stars = F, 
+        digits = 3)
+set.seed(42)
+take_home <- 0
+```
+
+# Introduction
+
+This activity will explore how to compare multiple regression models to find the "best" one.  The data set we will be using contains information on 1000 student's GPA in their first year of college.  Universities would like to try to predict student's GPA so they can determine who might need additional help on admission.  We will try to predict student's FYGPA (First Year GPA) using High School GPA (HSGPA) and SATSum (Sum of Math and Verbal SAT scores).
+
+We will consider four potential models to predict GPA:
+
+1. $FYGPA_i = \beta_0 + \epsilon_i$  (This model does not use either explanatory variable to predict FYGPA)
+2. $FYGPA_i = \beta_0 + \beta_1 \times HSGPA_i + \epsilon_i$ (This model only uses HSGPA)
+3. $FYGPA_i = \beta_0 + \beta_1 \times SATSum_i + \epsilon_i$ (This model only uses SATSum)
+4. $FYGPA_i = \beta_0 + \beta_1 \times HSGPA_i + \beta_2 \times SATSum_i + \epsilon_i$ (This model uses both HSGPA and SATSum)
+
+The goal is to obtain the best model, then interpret the coefficients in that model so that school administrators know how to assess these variables when deciding on admissions.
+
+---
+# Data
+
+The data are located in the `openintro` package.  We will only be working with the $4^{th}, 5^{th}, \, \text{and} 6^{th}$ columns so I'm going to extract those.  
+
+```{r data}
+require(openintro)
+data(satGPA)
+sat_sub <- satGPA[, c(4,5,6)]
+head(sat_sub)
+```
+
+If you are curious about any of these variables, take a look at the help page for the data by typing `?satGPA` in R.
+
+---
+# Take Home Question `r take_home <- take_home + 1; take_home`
+
+`r take_home`) Use the scatterplot matrix below to describe the relationship between each variable and the response.  Also, comment on whether multicollinearity appears to be a problem.
+
+```{r scatterplot-matrix, fig.width=6, fig.height=6}
+pairs(~SATSum + HSGPA + FYGPA, data = sat_sub)
+```
+
+--- &radio
+# Hypotheses comparing models 1 and 2
+
+We will start by seeing if $HSGPA$ is related to $FYGPA$.  To do this, we will use Model 2 from the introduction.  What are the appropriate hypotheses?
+
+1. $H_0: \beta_0 = 0; H_A: \beta_0 \neq 0$
+2. _$H_0: \beta_1 = 0; H_A: \beta_1 \neq 0$_
+3. $H_0: \beta_2 = 0; H_A: \beta_2 \neq 0$
+4. $H_0: \epsilon_i = 0; H_A: \epsilon_i \neq 0$
+
+*** .hint
+Which coefficient are we testing?
+
+*** .explanation
+$\beta_1$ is the coefficient which specifies the relationship between HSGPA and FYGPA.  If it is zero, then there is no linear relationship between the two.
+
+--- &checkbox
+# Assumptions Comparing Models 1 and 2
+
+Based on the diagnostic plots, which assumptions will we assume are met?
+
+```{r diag_m2}
+m2 <- lm(FYGPA ~ HSGPA, data = sat_sub)  ## fitting the model
+par(mfrow = c(2,2))                      ## requesting 2 rows and columns
+plot(m2)                                 ## plotting diagnostics
+par(mfrow = c(1,1))                      ## requesting 1 row and column
+```
+
+1. _Quantitative Variables_
+2. _Independence_
+3. _Constant Variance_
+4. Expected Counts greater than 
+5. _Linearity_
+6. _Normality_
+7. _No Influential Points_
+8. Multicollinearity
+
+*** .hint
+This is a Simple Linear Regression model.  Make sure that you are only looking at the assumptions necessary for Simple Linear Regression.
+
+*** .explanation
+Expected counts and multicollinearity are not assumptions required for SLR.  The other assumptions all appear to be valid.
+
+--- &multitext
+# Test Statistic, Distribution, and P-value
+
+```{r summary_m2}
+summary(m2)                              ## summarizing the fitted model
+```
+
+1. What is the appropriate test statistic?
+2. It is assumed to follow a $t$ distribution with how many degrees of freedom? (Recall that $n = 1000$)
+3. What is the p-value (if it is less that 0.001, enter 0)
+
+*** .hint
+These can all be found in the summary output by looking in the appropriate places.
+
+*** .explanation
+1. <span class = "answer">20.45</span>
+The test statistic is the `t value`
+2. <span class = "answer">998</span>
+There are $n = 1000$ students and we are estimating two coefficients so the degrees of freedom = $1000 - 2 = 998$.
+3. <span class = "answer">0</span>
+The actual p-value is less than $2 * 10^{-16}$
+
+--- &submitcompare1
+# Decision and Conclusion comparing model 1 & 2
+
+What is your decision?  Write a conclusion in the context of the problem.
+
+*** .explanation
+Reject the null.  There is strong evidence that there is a linear relationship between high school GPA and first year GPA in college in the population of students.
+
+---
+# Take Home Question `r take_home <- take_home + 1; take_home`
+
+Next, we want to test for an effect of SATSum.  We can perform a similar process as before by comparing a model with only SATSum as an explanatory variable to a model with no explanatory variables.  
+
+`r take_home`) Use the diagnostic plots and summary output below to perform the six steps of a hypothesis test comparing models 1 and 3.
+
+Diagnostic plots
+
+```{r diag_m3}
+m3 <- lm(FYGPA ~ SATSum, data = sat_sub)
+par(mfrow = c(2,2))
+plot(m3)
+par(mfrow = c(1,1))
+```
+
+Model Summary
+
+```{r summary_m3}
+summary(m3)
+```
+
+--- &radio
+# Hypotheses comparing models 3 vs 4
+
+We have decided that both FYGPA and SATSum are important predictors **on their own**.  Now we will test to see if they are important together.  
+
+First we will test to see if HSGPA is important after accounting for SATSum.  Which model should we perform the hypothesis test on?  What is the appropriate null hypothesis?
+
+1. Model 2; $H_0: \beta_1 = 0$
+2. Model 3; $H_0: \beta_1 = 0$
+3. _Model 4; $H_0: \beta_1 = 0$_
+4. Model 4; $H_0: \beta_2 = 0$
+
+*** .hint
+Which model estimates the effect of HSGPA controlling for SATSum?
+
+*** .explanation
+Model 4 estimates the effect of both HSGPA and SATSum after controlling for the other.
+
+--- &checkbox
+# Assumptions comparing models 3 vs 4
+
+Based on the diagnostic plots, which assumptions will we assume are met?
+
+```{r diag_m4}
+m4 <- lm(FYGPA ~ HSGPA + SATSum, data = sat_sub)  
+par(mfrow = c(2,2))                  
+plot(m4)                             
+par(mfrow = c(1,1))                 
+```
+
+Here are the Variance Inflation Factors
+
+```{r vif_m4}
+require(car)
+vif(m4)
+```
+
+
+1. _Quantitative Variables_
+2. _Independence_
+3. _Constant Variance_
+4. Expected Counts greater than 
+5. _Linearity_
+6. _Normality_
+7. _No Influential Points_
+8. _Multicollinearity_
+
+*** .hint
+This is a Multiple Linear Regression model.  Make sure that you are only looking at the assumptions necessary for MLR.
+
+*** .explanation
+Expected counts still is not necessary.  The VIFs are small so multicollinearity is met.
+
+
+--- &multitext
+# Test Statistic, Distribution, and P-value
+
+```{r summary_m4}
+summary(m4)                       
+```
+
+1. What is the appropriate test statistic?
+2. It is assumed to follow a $t$ distribution with how many degrees of freedom? (Recall that $n = 1000$)
+3. What is the p-value (if it is less that 0.001, enter 0)
+
+*** .hint
+These can all be found in the summary output by looking in the appropriate places.
+
+*** .explanation
+1. <span class = "answer">15.07</span>
+The test statistic is the `t value`
+2. <span class = "answer">997</span>
+There are $n = 1000$ students and we are estimating three coefficients so the degrees of freedom = $1000 - 3 = 997$.
+3. <span class = "answer">0</span>
+The actual p-value is less than $2 * 10^{-16}$
+
+--- &submitcompare1
+# Decision and Conclusion comparing model 3 & 4
+
+What is your decision?  Write a conclusion in the context of the problem.
+
+*** .explanation
+Reject the null.  There is strong evidence that there is a linear relationship between high school GPA and first year GPA in college in the population of students after accounting for the student's total SAT score.
+
+---
+# Take Home Question `r take_home <- take_home + 1; take_home`
+
+We have decided that HSGPA is important after accounting for SAT score.  Now, we will test to see if SAT score is important after accounting for HSGPA.
+
+`r take_home`) Use the diagnostic plots and summary output above to perform the six steps of a hypothesis test for an effect of SATSum after accounting for HSGPA.
+
+--- &radio
+# Comparing models using Adjusted $R^2$
+
+Instead of performing hypothesis tests using Adjusted $R^2$.  Here are the adjusted $R^2$ for the four models.
+
+<div class = "table table-hover table-bordered">
+
+```{r adjusted_r2, results='asis', echo=FALSE}
+m1 <- lm(FYGPA ~ 1, data = sat_sub)
+library(knitr)
+x <- data.frame(
+  Expl_Vars = c("none", "HSGPA", "SATSum", "HSGPA, SATSum"), 
+  adjusted_r2 = c(summary(m1)$adj.r.squared, 
+                  summary(m2)$adj.r.squared, 
+                  summary(m3)$adj.r.squared, 
+                  summary(m4)$adj.r.squared)
+  )
+kable(x, col.names = c("Explanatory Variables", "Adjusted $R^2$"), format = "html")
+```
+
+</div>
+
+Using Adjusted $R^2$, which model is preferred?
+
+1. Model 1
+2. Model 2
+3. Model 3
+4. _Model 4_
+
+*** .hint
+Recall that larger Adjusted $R^2$ suggest a better fit
+
+*** .explanation
+Model 4 has the largest Adjusted $R^2$
+
+---
+# Take Home Question `r take_home <- take_home + 1; take_home`
+
+Using both hypothesis tests and adjusted $R^2$, we decided that both explanatory variables are important.  So model 4 is preferable.
+
+`r take_home`) Provide 95% confidence intervals for both coefficients.  Use $t^*$
+
+---
+# Take Home Question `r take_home <- take_home + 1; take_home`
+
+We found that both variables have a statistically significant relationship with a college student's First Year GPA.  However, the $R^2$ for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.
+
+`r take_home`) 
+
+---
+# Take Home Question `r take_home <- take_home + 1; take_home`
+
+`r take_home`) Write a scope of inference for these data.
+
+
+
+
+
+
+
+
