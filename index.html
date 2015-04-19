@@ -40,8 +40,6 @@
     </p>
    <![endif]-->
 
-  <div class="container-fluid">
-  
   <a href=https://github.com/kferris10/Ch7-Comparing-Regression-Models><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
 
   <div class = "row">
@@ -60,9 +58,10 @@
 <!--
 SIDEBAR-NAV
 -->
-        <div class = "col-md-3 pull-right hidden-sm hidden-xs hidden-print page-sidebar affix-top">
+        <div class = "col-md-3 pull-right hidden-sm hidden-xs hidden-print page-sidebar affix-top">   
+          <div class="container-fluid">
 					  <nav class = "sidebar-nav">
-						  <ul class = "nav affix-top" data-spy="affix" data-offset-top="20" data-offset-bottom="20" role = "navigation">
+						  <ul class = "nav affix" data-spy="affix" data-offset-top="300" data-offset-bottom="20" role = "navigation">
                 
                 <li><a href = "#slide-1"> Introduction</a></li>
 
@@ -99,14 +98,15 @@ SIDEBAR-NAV
                 <li><a href = "#slide-17"> Take Home Question 6</a></li>
 						  </ul>
 					  </nav>
+          </div>
         </div>  <!-- end sidebar -->
 
 <!--
 PAGE CONTENT
 -->
         <div class = "col-md-9 col-sm-12 push-left">
-          <div class="section" id="slide-1">
-  <div class="container-fluid">
+          <div class = "container-fluid">
+            <div class="section" id="slide-1">
     <div class="page-header">
       <h2>Introduction</h2>
     <hr>
@@ -124,10 +124,10 @@ PAGE CONTENT
 
 <p>The goal is to obtain the best model, then interpret the coefficients in that model so that school administrators know how to assess these variables when deciding on admissions.</p>
 
-  </div>
+<p>There will be 6 questions for you to turn in to me.</p>
+
 </div>
 <div class="section" id="slide-2">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Data</h2>
     <hr>
@@ -151,10 +151,8 @@ head(sat_sub)
 
 <p>If you are curious about any of these variables, take a look at the help page for the data by typing <code>?satGPA</code> in R.</p>
 
-  </div>
 </div>
 <div class="section" id="slide-3">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Take Home Question 1</h2>
     <hr>
@@ -166,10 +164,8 @@ head(sat_sub)
 
 <p><img src="assets/fig/scatterplot-matrix-1.png" title="plot of chunk scatterplot-matrix" alt="plot of chunk scatterplot-matrix" style="display: block; margin: auto;" /></p>
 
-  </div>
 </div>
 <div class="section" id="slide-4">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Hypotheses comparing models 1 and 2</h2>
     <hr>
@@ -199,10 +195,8 @@ head(sat_sub)
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-5">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Assumptions Comparing Models 1 and 2</h2>
     <hr>
@@ -244,10 +238,8 @@ par(mfrow = c(1,1))                      ## requesting 1 row and column
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-6">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Test Statistic, Distribution, and P-value</h2>
     <hr>
@@ -302,10 +294,8 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-7">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Decision and Conclusion comparing model 1 &amp; 2</h2>
     <hr>
@@ -326,10 +316,8 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
   <p>Reject the null.  There is strong evidence that there is a linear relationship between high school GPA and first year GPA in college in the population of students.</p>
 
 </div>
-  </div>
 </div>
 <div class="section" id="slide-8">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Take Home Question 2</h2>
     <hr>
@@ -371,10 +359,8 @@ par(mfrow = c(1,1))
 #&gt; F-statistic:  268 on 1 and 998 DF,  p-value: &lt;2e-16
 </code></pre>
 
-  </div>
 </div>
 <div class="section" id="slide-9">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Hypotheses comparing models 3 vs 4</h2>
     <hr>
@@ -406,10 +392,8 @@ par(mfrow = c(1,1))
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-10">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Assumptions comparing models 3 vs 4</h2>
     <hr>
@@ -461,10 +445,8 @@ vif(m4)
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-11">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Test Statistic, Distribution, and P-value</h2>
     <hr>
@@ -520,10 +502,8 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-12">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Decision and Conclusion comparing model 3 &amp; 4</h2>
     <hr>
@@ -544,10 +524,8 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
   <p>Reject the null.  There is strong evidence that there is a linear relationship between high school GPA and first year GPA in college in the population of students after accounting for the student&#39;s total SAT score.</p>
 
 </div>
-  </div>
 </div>
 <div class="section" id="slide-13">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Take Home Question 3</h2>
     <hr>
@@ -556,10 +534,8 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
 
 <p>3) Use the diagnostic plots and summary output above to perform the six steps of a hypothesis test for an effect of SATSum after accounting for HSGPA.</p>
 
-  </div>
 </div>
 <div class="section" id="slide-14">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Comparing models using Adjusted \(R^2\)</h2>
     <hr>
@@ -622,45 +598,38 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
 
 </div>
 </div>
-  </div>
 </div>
 <div class="section" id="slide-15">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Take Home Question 4</h2>
     <hr>
     </div>
   <p>Using both hypothesis tests and adjusted \(R^2\), we decided that both explanatory variables are important.  So model 4 is preferable.</p>
 
-<p>4) Provide 95% confidence intervals for both coefficients.  Use \(t^*\)</p>
+<p>4) Provide and interpret 95% confidence intervals for both coefficients.  Use \(t^*\) = 2.</p>
 
-  </div>
 </div>
 <div class="section" id="slide-16">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Take Home Question 5</h2>
     <hr>
     </div>
-  <p>We found that both variables have a statistically significant relationship with a college student&#39;s First Year GPA.  However, the \(R^2\) for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.</p>
+  <p>We found that both variables have a statistically significant relationship with a college student&#39;s First Year GPA.  However, the \(R^2\) for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.  This is relatively low.</p>
 
-<p>5) </p>
+<p>5) What does the \(R^2\) suggest about the usefulness of the model in predicting GPA?  Would you feel comfortable trusting its predictions?</p>
 
-  </div>
 </div>
 <div class="section" id="slide-17">
-  <div class="container-fluid">
     <div class="page-header">
       <h2>Take Home Question 6</h2>
     <hr>
     </div>
   <p>6) Write a scope of inference for these data.</p>
 
-  </div>
 </div>
+          </div>
         </div>  <!-- end content -->
       
-      </div> <!-- end container -->
     </div>  <!-- end content row -->
 
    

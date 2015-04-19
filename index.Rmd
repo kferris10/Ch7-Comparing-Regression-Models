@@ -52,6 +52,8 @@ We will consider four potential models to predict GPA:
 
 The goal is to obtain the best model, then interpret the coefficients in that model so that school administrators know how to assess these variables when deciding on admissions.
 
+There will be 6 questions for you to turn in to me.
+
 ---
 # Data
 
@@ -301,14 +303,14 @@ Model 4 has the largest Adjusted $R^2$
 
 Using both hypothesis tests and adjusted $R^2$, we decided that both explanatory variables are important.  So model 4 is preferable.
 
-`r take_home`) Provide 95% confidence intervals for both coefficients.  Use $t^*$
+`r take_home`) Provide and interpret 95% confidence intervals for both coefficients.  Use $t^*$ = 2.
 
 ---
 # Take Home Question `r take_home <- take_home + 1; take_home`
 
-We found that both variables have a statistically significant relationship with a college student's First Year GPA.  However, the $R^2$ for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.
+We found that both variables have a statistically significant relationship with a college student's First Year GPA.  However, the $R^2$ for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.  This is relatively low.
 
-`r take_home`) 
+`r take_home`) What does the $R^2$ suggest about the usefulness of the model in predicting GPA?  Would you feel comfortable trusting its predictions?
 
 ---
 # Take Home Question `r take_home <- take_home + 1; take_home`
