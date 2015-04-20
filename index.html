@@ -49,7 +49,7 @@
         <h1>Comparing Multiple Regression Models</h1>
         <h3>Ch 7 Multiple Linear Regression</h3>
         <h3>Stat 217</h3>
-        <h3> 2015-04-19 </h3>
+        <h3> 2015-04-20 </h3>
       </div>
     </div>
         
@@ -217,7 +217,7 @@ par(mfrow = c(1,1))                      ## requesting 1 row and column
 <li><em>Quantitative Variables</em></li>
 <li><em>Independence</em></li>
 <li><em>Constant Variance</em></li>
-<li>Expected Counts greater than </li>
+<li>Expected Counts greater than 5</li>
 <li><em>Linearity</em></li>
 <li><em>Normality</em></li>
 <li><em>No Influential Points</em></li>
@@ -270,7 +270,7 @@ par(mfrow = c(1,1))                      ## requesting 1 row and column
 <ol>
 <li>What is the appropriate test statistic?</li>
 <li>It is assumed to follow a \(t\) distribution with how many degrees of freedom? (Recall that \(n = 1000\))</li>
-<li>What is the p-value (if it is less that 0.001, enter 0)</li>
+<li>What is the p-value (if it is less that 0.001, enter 0.001)</li>
 </ol>
 
   <button class="quiz-submit btn btn-primary">Submit</button>
@@ -288,7 +288,7 @@ par(mfrow = c(1,1))                      ## requesting 1 row and column
 The test statistic is the <code>t value</code></li>
 <li><span class = "answer">998</span>
 There are \(n = 1000\) students and we are estimating two coefficients so the degrees of freedom = \(1000 - 2 = 998\).</li>
-<li><span class = "answer">0</span>
+<li><span class = "answer">0.001</span>
 The actual p-value is less than \(2 * 10^{-16}\)</li>
 </ol>
 
@@ -424,7 +424,7 @@ vif(m4)
 <li><em>Quantitative Variables</em></li>
 <li><em>Independence</em></li>
 <li><em>Constant Variance</em></li>
-<li>Expected Counts greater than </li>
+<li>Expected Counts greater than 5</li>
 <li><em>Linearity</em></li>
 <li><em>Normality</em></li>
 <li><em>No Influential Points</em></li>
@@ -437,7 +437,7 @@ vif(m4)
   <button class="quiz-clear btn btn-danger">Clear</button>
   
   <div class="quiz-hint">
-  <p>This is a Multiple Linear Regression model.  Make sure that you are only looking at the assumptions necessary for MLR.</p>
+  <p>This is a Multiple Linear Regression model.  Make sure that you are checking all the assumptions necessary for MLR.</p>
 
 </div>
 <div class="quiz-explanation">
@@ -478,7 +478,7 @@ vif(m4)
 <ol>
 <li>What is the appropriate test statistic?</li>
 <li>It is assumed to follow a \(t\) distribution with how many degrees of freedom? (Recall that \(n = 1000\))</li>
-<li>What is the p-value (if it is less that 0.001, enter 0)</li>
+<li>What is the p-value (if it is less that 0.001, enter 0.001)</li>
 </ol>
 
   <button class="quiz-submit btn btn-primary">Submit</button>
@@ -496,7 +496,7 @@ vif(m4)
 The test statistic is the <code>t value</code></li>
 <li><span class = "answer">997</span>
 There are \(n = 1000\) students and we are estimating three coefficients so the degrees of freedom = \(1000 - 3 = 997\).</li>
-<li><span class = "answer">0</span>
+<li><span class = "answer">0.001</span>
 The actual p-value is less than \(2 * 10^{-16}\)</li>
 </ol>
 
@@ -606,7 +606,7 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
     </div>
   <p>Using both hypothesis tests and adjusted \(R^2\), we decided that both explanatory variables are important.  So model 4 is preferable.</p>
 
-<p>4) Provide and interpret 95% confidence intervals for both coefficients.  Use \(t^*\) = 2.</p>
+<p>4) Provide and interpret 95% confidence intervals for one of the coefficients.  Use \(t^*\) = 2.</p>
 
 </div>
 <div class="section" id="slide-16">
@@ -614,9 +614,7 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
       <h2>Take Home Question 5</h2>
     <hr>
     </div>
-  <p>We found that both variables have a statistically significant relationship with a college student&#39;s First Year GPA.  However, the \(R^2\) for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.  This is relatively low.</p>
-
-<p>5) What does the \(R^2\) suggest about the usefulness of the model in predicting GPA?  Would you feel comfortable trusting its predictions?</p>
+  <p>5) Write a scope of inference for these data.</p>
 
 </div>
 <div class="section" id="slide-17">
@@ -624,7 +622,13 @@ The actual p-value is less than \(2 * 10^{-16}\)</li>
       <h2>Take Home Question 6</h2>
     <hr>
     </div>
-  <p>6) Write a scope of inference for these data.</p>
+  <p>6) Name the appropriate method of analysis (Chi-Squared Test, One-Way ANOVA, MLR, etc) for each of the following</p>
+
+<p>a. A cultural researcher is interested to see if there is a relationship between height (cm) and annual income (US dollars).</p>
+
+<p>b. A consumer group is investigating if there is a difference in the amount of high-fructose corn syrup (grams/serving) between 5 major brands of salad dressing.</p>
+
+<p>c. Researchers are interested in estimating mammals brain weight.  They want to predict it using body weight, duration of pregnancy, and litter size.</p>
 
 </div>
           </div>

@@ -2,7 +2,7 @@
 title       : Comparing Multiple Regression Models
 subtitle    : Ch 7 Multiple Linear Regression
 author      : Stat 217
-today       : " 2015-04-19 "
+today       : " 2015-04-20 "
 framework   : bootstrap3
 highlighter : highlight.js 
 hitheme     : github      
@@ -108,7 +108,7 @@ par(mfrow = c(1,1))                      ## requesting 1 row and column
 1. _Quantitative Variables_
 2. _Independence_
 3. _Constant Variance_
-4. Expected Counts greater than 
+4. Expected Counts greater than 5
 5. _Linearity_
 6. _Normality_
 7. _No Influential Points_
@@ -149,7 +149,7 @@ summary(m2)                              ## summarizing the fitted model
 
 1. What is the appropriate test statistic?
 2. It is assumed to follow a $t$ distribution with how many degrees of freedom? (Recall that $n = 1000$)
-3. What is the p-value (if it is less that 0.001, enter 0)
+3. What is the p-value (if it is less that 0.001, enter 0.001)
 
 *** .hint
 These can all be found in the summary output by looking in the appropriate places.
@@ -159,7 +159,7 @@ These can all be found in the summary output by looking in the appropriate place
 The test statistic is the `t value`
 2. <span class = "answer">998</span>
 There are $n = 1000$ students and we are estimating two coefficients so the degrees of freedom = $1000 - 2 = 998$.
-3. <span class = "answer">0</span>
+3. <span class = "answer">0.001</span>
 The actual p-value is less than $2 * 10^{-16}$
 
 --- &submitcompare1
@@ -265,14 +265,14 @@ vif(m4)
 1. _Quantitative Variables_
 2. _Independence_
 3. _Constant Variance_
-4. Expected Counts greater than 
+4. Expected Counts greater than 5
 5. _Linearity_
 6. _Normality_
 7. _No Influential Points_
 8. _Multicollinearity_
 
 *** .hint
-This is a Multiple Linear Regression model.  Make sure that you are only looking at the assumptions necessary for MLR.
+This is a Multiple Linear Regression model.  Make sure that you are checking all the assumptions necessary for MLR.
 
 *** .explanation
 Expected counts still is not necessary.  The VIFs are small so multicollinearity is met.
@@ -308,7 +308,7 @@ summary(m4)
 
 1. What is the appropriate test statistic?
 2. It is assumed to follow a $t$ distribution with how many degrees of freedom? (Recall that $n = 1000$)
-3. What is the p-value (if it is less that 0.001, enter 0)
+3. What is the p-value (if it is less that 0.001, enter 0.001)
 
 *** .hint
 These can all be found in the summary output by looking in the appropriate places.
@@ -318,7 +318,7 @@ These can all be found in the summary output by looking in the appropriate place
 The test statistic is the `t value`
 2. <span class = "answer">997</span>
 There are $n = 1000$ students and we are estimating three coefficients so the degrees of freedom = $1000 - 3 = 997$.
-3. <span class = "answer">0</span>
+3. <span class = "answer">0.001</span>
 The actual p-value is less than $2 * 10^{-16}$
 
 --- &submitcompare1
@@ -390,22 +390,23 @@ Model 4 has the largest Adjusted $R^2$
 
 Using both hypothesis tests and adjusted $R^2$, we decided that both explanatory variables are important.  So model 4 is preferable.
 
-4) Provide and interpret 95% confidence intervals for both coefficients.  Use $t^*$ = 2.
+4) Provide and interpret 95% confidence intervals for one of the coefficients.  Use $t^*$ = 2.
 
 ---
 # Take Home Question 5
 
-We found that both variables have a statistically significant relationship with a college student's First Year GPA.  However, the $R^2$ for this model is 0.358 so only 35.8% of the variability in First Year GPA is explained by High School GPA and SAT score.  This is relatively low.
-
-5) What does the $R^2$ suggest about the usefulness of the model in predicting GPA?  Would you feel comfortable trusting its predictions?
+5) Write a scope of inference for these data.
 
 ---
 # Take Home Question 6
 
-6) Write a scope of inference for these data.
+6) Name the appropriate method of analysis (Chi-Squared Test, One-Way ANOVA, MLR, etc) for each of the following
 
+a. A cultural researcher is interested to see if there is a relationship between height (cm) and annual income (US dollars).
 
+b. A consumer group is investigating if there is a difference in the amount of high-fructose corn syrup (grams/serving) between 5 major brands of salad dressing.
 
+c. Researchers are interested in estimating mammals brain weight.  They want to predict it using body weight, duration of pregnancy, and litter size.
 
 
 
